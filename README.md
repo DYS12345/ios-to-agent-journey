@@ -2,3 +2,4 @@
 终点：一个可离线运行的 iOS Agent，调用至少 2 个本地工具，含记忆/RAG、评估日志和 Demo 视频
 当前进度：第 01 课 · 仓库已建立
 第 02 课完成 · DeepSeek 调用跑通 · callModel 就绪
+第 03 课完成 · callModel 接收 messages · 多轮对话验证通过

@@ -1,4 +1,5 @@
 import OpenAI from "openai";
+import type { ChatCompletionMessageParam } from "openai/resources/chat/completions";
 
 const client = new OpenAI({
   baseURL: "https://api.deepseek.com",
@@ -6,19 +7,18 @@ const client = new OpenAI({
 });
 
 export async function callModel(
-  userContent: string,
-  systemContent = "你是一个简洁的助手，用一句话回答。"
+  messages: ChatCompletionMessageParam[]
 ) {
   const response = await client.chat.completions.create({
     model: "deepseek-flash",
-    messages: [
-      { role: "system", content: systemContent },
-      { role: "user", content: userContent },
-    ],
+    messages,
   });
 
+  const message = response.choices[0].message;
+
   return {
-    text: response.choices[0]?.message.content ?? "",
+    message,                       // 完整的 assistant 消息，后面要追加回数组
+    text: message.content ?? "",
     usage: response.usage,
   };
 }
